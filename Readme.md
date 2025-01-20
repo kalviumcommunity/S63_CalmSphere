@@ -36,3 +36,9 @@ Optional Tools Socket.io, Firebase Auth, Chart.js
 
 # 🌌 Find Your Calm, One Pixel at a Time!
 Start relaxing today with CalmSphere!
+                                                                                                                
+
+
+
+
+                                                                                                                
