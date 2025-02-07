@@ -2,9 +2,10 @@
   "name": "s63_calmsphere",
   "version": "1.0.0",
   "description": "CalmSphere is a simple yet powerful website designed to help you unwind, de-stress, and find your calm. Whether it's through guided breathing, soothing soundscapes, or fun mini-games, CalmSphere offers a safe digital space to relax and recharge.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
