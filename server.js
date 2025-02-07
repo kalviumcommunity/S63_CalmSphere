@@ -1,14 +1,20 @@
 const express = require('express');
-const connectDB = require('./connectDB'); // Import connectDB function
-const app = express();
+const connectDB = require('./connectDB'); // Import the MongoDB connection function
+const mongoose = require('mongoose');
 
-// Middleware
+const app = express();
 app.use(express.json());
 
 // Connect to MongoDB
-connectDB(); 
+connectDB();
 
-// Routes
+// Home route displaying database connection status
+app.get('/', (req, res) => {
+  const dbStatus = mongoose.connection.readyState === 1 ? 'Connected' : 'Not Connected';
+  res.json({ message: 'Welcome to CalmSphere', dbStatus });
+});
+
+// Ping route
 app.get('/ping', (req, res) => {
   res.send('Pong!');
 });
