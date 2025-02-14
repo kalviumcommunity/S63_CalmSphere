@@ -1,0 +1,80 @@
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Background styling */
+.landing-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #a8e6cf, #dcedc1, #ffd3b6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Overlay for a softer feel */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+/* Content styling */
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.content h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.content p {
+  font-size: 1.3rem;
+  color: #34495e;
+  margin: 20px 0;
+}
+
+/* Button */
+.explore-btn {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  border: none;
+  background: #5cdb95;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  animation: popUp 1.5s infinite ease-in-out;
+}
+
+/* Hover effect */
+.explore-btn:hover {
+  background: #379683;
+  transform: scale(1.1);
+}
+
+/* Keyframes for the pop-up animation */
+@keyframes popUp {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
