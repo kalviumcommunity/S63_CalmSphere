@@ -1,0 +1,39 @@
+meta {
+  name: API
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/
+  body: none
+  auth: none
+}
+meta {
+  name: Get Entities
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/api/entities
+  body: none
+  auth: none
+}
+meta {
+  name: Create Entity
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/api/entities
+  body: {
+    "name": "Test Entity",
+    "description": "This is a test entity."
+  }
+  auth: none
+  headers: {
+    "Content-Type": "application/json"
+  }
+}
