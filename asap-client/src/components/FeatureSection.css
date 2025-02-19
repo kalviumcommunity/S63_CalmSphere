@@ -1,0 +1,50 @@
+.feature-section {
+    background: linear-gradient(to bottom, #d6e4f0, #f8f9fa);
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .feature-heading {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .feature-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .feature-card {
+    background: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    width: 280px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #34495e;
+  }
+  
+  .feature-description {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 10px;
+  }
+  
