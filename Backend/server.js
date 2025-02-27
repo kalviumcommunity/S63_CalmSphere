@@ -1,12 +1,16 @@
 const express = require('express');
-const connectDB = require('./connectDB'); 
 const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+// const userRoutes = require('./routes/userRoutes');
+const connectDB = require('./connectDB');
 
 const entityRoutes = require('./routes/entityRoutes');  // Ensure this exists!
 const userRoutes = require('./routes/userRoutes');  // Ensure this exists!
-
+dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Connect to MongoDB
 connectDB();
@@ -23,10 +27,12 @@ app.get('/ping', (req, res) => {
 });
 
 // ✅ Use CRUD routes (Make sure the file paths are correct)
-app.use('/api/entities', entityRoutes);  // <-- This must be correct
-app.use('/api/users', userRoutes);
+// app.use('/api/entities', entityRoutes);  // <-- This must be correct
+// app.use('/api/users', userRoutes);
 
-const PORT = process.env.PORT || 3000;
+app.use('/api', userRoutes);
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
