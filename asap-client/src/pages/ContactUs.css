@@ -1,0 +1,41 @@
+.contact-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .submitted-data {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 5px;
+  }
+  
