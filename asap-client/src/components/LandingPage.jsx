@@ -1,6 +1,7 @@
 import React from "react";
 import "./global.css";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LandingPage = ({ scrollProgress }) => {
   const navigate = useNavigate();
@@ -16,6 +17,9 @@ const LandingPage = ({ scrollProgress }) => {
         <h1>Welcome to CalmSphere</h1>
         <p>Find your inner peace in the chaos of everyday life.</p>
         <button className="explore-btn"  onClick={() => navigate("/login")} >Explore Now</button>
+        <Link to="/contact">
+        <button className="contact-btn">Contact Us</button>
+      </Link>
       </div>
     </section>
   );
