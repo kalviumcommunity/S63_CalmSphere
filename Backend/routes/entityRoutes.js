@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Entity = require('../models/entityModel'); // Ensure this path is correct!
 
+
 // CREATE - Add a new entity
 router.post('/', async (req, res) => {  // ✅ Base route should be `/`
   try {
@@ -42,5 +43,8 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ error: 'Error deleting entity' });
   }
 });
+
+
+
 
 module.exports = router;

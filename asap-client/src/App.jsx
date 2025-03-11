@@ -7,6 +7,9 @@ import "./components/global.css";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+import ContactUs from "./pages/ContactUs";
+import MoodTracking from "./pages/MoodTracking";
+
 const App = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -38,7 +41,8 @@ const App = () => {
         <Route path="/loginPage" element={<LoginPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/mood-tracking" element={<MoodTracking />} />
       </Routes>
     </Router>
   );

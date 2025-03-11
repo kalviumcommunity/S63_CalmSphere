@@ -4,6 +4,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 // const userRoutes = require('./routes/userRoutes');
 const connectDB = require('./connectDB');
+const contactRoutes = require("./routes/contactRoutes");
+const moodRoutes = require("./routes/moodRoutes");
 
 const entityRoutes = require('./routes/entityRoutes');  // Ensure this exists!
 const userRoutes = require('./routes/userRoutes');  // Ensure this exists!
@@ -31,6 +33,8 @@ app.get('/ping', (req, res) => {
 // app.use('/api/users', userRoutes);
 
 app.use('/api', userRoutes);
+app.use("/api", contactRoutes);
+app.use("/api/mood-tracking", moodRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

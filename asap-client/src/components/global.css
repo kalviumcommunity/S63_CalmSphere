@@ -101,3 +101,41 @@ body {
     transform: translateY(-5px);
   }
 }
+
+.contact-container {
+  width: 400px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+}
+
+.contact-container input,
+.contact-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-container button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-container button:hover {
+  background-color: #45a049;
+}
+
+.submitted-data {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #d4edda;
+}
