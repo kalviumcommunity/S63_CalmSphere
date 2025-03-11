@@ -1,0 +1,114 @@
+.mood-tracker-container {
+    max-width: 500px;
+    margin: auto;
+    background: #e6f7f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h1 {
+    color: #2c3e50;
+    font-size: 24px;
+  }
+  
+  .custom-calendar {
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mood-list {
+    margin-top: 15px;
+  }
+  
+  .mood-item {
+    background: #d4f1f4;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .mood-item p {
+    margin: 0;
+  }
+  
+  .edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .edit-btn {
+    background: #f1c40f;
+    color: white;
+  }
+  
+  .delete-btn {
+    background: #e74c3c;
+    color: white;
+  }
+  
+  .mood-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .mood-form select,
+  .mood-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .mood-form button {
+    background: #27ae60;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .mood-form button:hover {
+    background: #219150;
+  }
+  .react-calendar {
+    width: 100% !important; 
+    max-width: 400px;
+    background: rgb(101, 136, 117);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .react-calendar__month-view__weekdays {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #ccc;
+  }
+  
+  .react-calendar__tile {
+    padding: 10px !important;
+    text-align: center;
+    border-radius: 5px;
+    color: black;
+  }
+  
+  .react-calendar__tile--now {
+    background: #3498db !important;
+    color: white;
+  }
+  
+  .react-calendar__tile--active {
+    background: #2ecc71 !important;
+    color: white;
+  }
+  
