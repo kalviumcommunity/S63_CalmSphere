@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Signup.css"; // Ensure this file exists in the same folder
+import "./Signup.css"; // Ensure this file exists
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -9,9 +9,28 @@ const Signup = () => {
   const [message, setMessage] = useState(""); // Stores success or error message
   const [isSuccess, setIsSuccess] = useState(false); // Tracks success state
 
+  // Function to validate password
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return passwordRegex.test(password);
+  };
+
   // Function to handle form submission
   const handleSignup = async (e) => {
     e.preventDefault(); // Prevent default form submission
+
+    // Client-side validations
+    if (!name || !email || !password) {
+      setMessage("All fields are required!");
+      setIsSuccess(false);
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setMessage("Password must be at least 8 characters, include 1 uppercase, 1 lowercase, and 1 number.");
+      setIsSuccess(false);
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:5000/api/signup", {
@@ -26,9 +45,9 @@ const Signup = () => {
 
       if (response.ok) {
         setMessage("🎉 Signup successful! You can now log in.");
-        setIsSuccess(true); // Show success message
+        setIsSuccess(true);
 
-        // Clear the form
+        // Clear form fields
         setName("");
         setEmail("");
         setPassword("");
@@ -50,7 +69,7 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
-      {/* Success Message at the Top */}
+      {/* Success/Error Message */}
       {message && (
         <div className={`message-box ${isSuccess ? "success" : "error"}`}>
           {message}
@@ -66,9 +85,9 @@ const Signup = () => {
               type="text"
               name="name"
               placeholder="Enter your name"
-              required
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -77,9 +96,9 @@ const Signup = () => {
               type="email"
               name="email"
               placeholder="Enter your email"
-              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group">
@@ -88,9 +107,9 @@ const Signup = () => {
               type="password"
               name="password"
               placeholder="Create a password"
-              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <button type="submit" className="signup-btn">Sign Up</button>
