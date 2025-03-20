@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-
+const postRoutes = require("./routes/postRoutes");
 connectDB();
 
 
@@ -33,6 +33,11 @@ app.get('/ping', (req, res) => {
 app.use('/api', userRoutes);
 app.use("/api", contactRoutes);
 app.use("/api/mood-tracking", moodRoutes);
+app.use("/api/posts", postRoutes);
+console.log("Post routes loaded:", postRoutes);
+
+app.use("/api/users", require("./routes/userRoutes"));
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
