@@ -6,9 +6,12 @@ import LoginPage from "./pages/LoginPage";
 import "./components/global.css";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import CreatePost from "./pages/CreatePost";
+import Posts from "./pages/Post";
 
 import ContactUs from "./pages/ContactUs";
 import MoodTracking from "./pages/MoodTracking";
+import EntitiesList from "./components/EntitiesList";
 
 const App = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -43,6 +46,9 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/mood-tracking" element={<MoodTracking />} />
+        <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/entities" element={<EntitiesList />} /> 
       </Routes>
     </Router>
   );

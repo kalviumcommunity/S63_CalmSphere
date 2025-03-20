@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css"; // Ensure this is in the same folder as Login.jsx
+import './Post.css'
 
 const Login = () => {
   const [email, setEmail] = useState("");

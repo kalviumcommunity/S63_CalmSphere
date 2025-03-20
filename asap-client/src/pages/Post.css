@@ -1,0 +1,81 @@
+/* General container styling */
+.posts-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f7f9fc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Heading */
+  .posts-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Error message */
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  /* Post list */
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Individual post card */
+  .post-card {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .post-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Post email */
+  .post-email {
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Post content */
+  .post-content {
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  /* Post image */
+  .post-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  /* Post link */
+  .post-card a {
+    display: inline-block;
+    margin-top: 8px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .post-card a:hover {
+    text-decoration: underline;
+  }
+  
