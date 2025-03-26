@@ -1,50 +1,59 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Entity = require('../models/entityModel'); // Ensure this path is correct!
+const {db} = require("../connectDB1"); // Import MySQL connection
 
+// Create a new entity
+router.post("/", async (req, res) => {
+  const { name, description, created_by } = req.body;
 
-// CREATE - Add a new entity
-router.post('/', async (req, res) => {  // ✅ Base route should be `/`
   try {
-    const newEntity = new Entity(req.body);
-    await newEntity.save();
-    res.status(201).json(newEntity);
+    // Check if the user exists
+    const [users] = await db.query("SELECT * FROM users WHERE id = ?", [created_by]);
+    if (users.length === 0) {
+      return res.status(400).json({ error: "User not found." });
+    }
+
+    // Insert the entity
+    const [result] = await db.query(
+      "INSERT INTO entities (name, description, created_by) VALUES (?, ?, ?)",
+      [name, description, created_by]
+    );
+
+    res.status(201).json({
+      message: "Entity created successfully!",
+      entity: { id: result.insertId, name, description, created_by }
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Error creating entity' });
+    console.error("❌ Error creating entity:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-// READ - Get all entities
-router.get('/', async (req, res) => {  // ✅ Base route should be `/`
+// Fetch entities by user
+router.get("/by-user/:userId", async (req, res) => {
   try {
-    const entities = await Entity.find();
+    const { userId } = req.params;
+    const [entities] = await db.query(
+      "SELECT e.id, e.name, e.description, u.email FROM entities e JOIN users u ON e.created_by = u.id WHERE e.created_by = ?",
+      [userId]
+    );
+
     res.json(entities);
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching entities' });
+    console.error("❌ Error fetching entities:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-// UPDATE - Update an entity by ID
-router.put('/:id', async (req, res) => {
+// Get all users for dropdown
+router.get("/users", async (req, res) => {
   try {
-    const updatedEntity = await Entity.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(updatedEntity);
+    const [users] = await db.query("SELECT id, email FROM users");
+    res.json(users);
   } catch (error) {
-    res.status(500).json({ error: 'Error updating entity' });
+    console.error("❌ Error fetching users:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
-
-// DELETE - Delete an entity by ID
-router.delete('/:id', async (req, res) => {
-  try {
-    await Entity.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Entity deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ error: 'Error deleting entity' });
-  }
-});
-
-
-
 
 module.exports = router;
