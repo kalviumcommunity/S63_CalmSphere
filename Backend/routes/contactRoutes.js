@@ -1,27 +1,37 @@
 const express = require("express");
 const router = express.Router();
-const Contact = require("../models/Contact");
+const {db} = require("../connectDB1"); // MySQL connection
 
-// Handle form submission
-router.post("/contact", async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
-    const newContact = new Contact({ name, email, message });
-    await newContact.save();
-    res.status(201).json({ success: true, message: "Message sent!", data: newContact });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error", error });
+// POST - Save a new contact message
+router.post("/", (req, res) => {  
+  console.log("📥 Received request:", req.body);
+
+  const { name, email, message } = req.body;
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: "All fields are required" });
   }
+
+  const sql = "INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)";
+  db.query(sql, [name, email, message], (err, result) => {
+    if (err) {
+      console.error("❌ SQL Error:", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+    console.log("✅ Message saved:", result.insertId);
+    res.status(201).json({ message: "Message sent!", id: result.insertId });
+  });
 });
 
-// Get all submitted messages
-router.get("/contact", async (req, res) => {
-  try {
-    const messages = await Contact.find();
-    res.status(200).json(messages);
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error });
-  }
+// GET - Fetch all messages
+router.get("/", (req, res) => {
+  const sql = "SELECT * FROM contacts";
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error("❌ SQL Error:", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+    res.json(results);
+  });
 });
 
 module.exports = router;

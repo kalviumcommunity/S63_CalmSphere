@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Entity = require("../models/entityModel");
-const User = require("../models/userModel");
+const {db} = require("../connectDB1"); // Import MySQL connection
 
 // Create a new entity
 router.post("/", async (req, res) => {
@@ -9,18 +8,23 @@ router.post("/", async (req, res) => {
 
   try {
     // Check if the user exists
-    const userExists = await User.findById(created_by);
-    if (!userExists) {
+    const [users] = await db.query("SELECT * FROM users WHERE id = ?", [created_by]);
+    if (users.length === 0) {
       return res.status(400).json({ error: "User not found." });
     }
 
-    // Create the entity
-    const newEntity = new Entity({ name, description, created_by });
-    await newEntity.save();
+    // Insert the entity
+    const [result] = await db.query(
+      "INSERT INTO entities (name, description, created_by) VALUES (?, ?, ?)",
+      [name, description, created_by]
+    );
 
-    res.status(201).json({ message: "Entity created successfully!", entity: newEntity });
+    res.status(201).json({
+      message: "Entity created successfully!",
+      entity: { id: result.insertId, name, description, created_by }
+    });
   } catch (error) {
-    console.error(error);
+    console.error("❌ Error creating entity:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -29,10 +33,14 @@ router.post("/", async (req, res) => {
 router.get("/by-user/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
-    const entities = await Entity.find({ created_by: userId }).populate("created_by", "email");
+    const [entities] = await db.query(
+      "SELECT e.id, e.name, e.description, u.email FROM entities e JOIN users u ON e.created_by = u.id WHERE e.created_by = ?",
+      [userId]
+    );
+
     res.json(entities);
   } catch (error) {
-    console.error(error);
+    console.error("❌ Error fetching entities:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
@@ -40,10 +48,10 @@ router.get("/by-user/:userId", async (req, res) => {
 // Get all users for dropdown
 router.get("/users", async (req, res) => {
   try {
-    const users = await User.find({}, "email _id");
+    const [users] = await db.query("SELECT id, email FROM users");
     res.json(users);
   } catch (error) {
-    console.error(error);
+    console.error("❌ Error fetching users:", error);
     res.status(500).json({ error: "Server error" });
   }
 });

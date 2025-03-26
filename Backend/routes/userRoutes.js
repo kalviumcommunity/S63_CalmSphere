@@ -1,15 +1,12 @@
 const express = require("express");
-const router = express.Router();
-const User = require("../models/userModel.js"); // Adjust path as needed
+const { createUser, getUsers, updateUser, deleteUser } = require("../controllers/userController");
 
-// Get all users
-router.get("/", async (req, res) => {
-  try {
-    const users = await User.find({}, "email"); // Fetch only emails
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error });
-  }
-});
+const router = express.Router();
+
+router.post("/signup", createUser);
+router.get("/", getUsers);
+router.put("/:id", updateUser);
+router.delete("/:id", deleteUser);
+
 
 module.exports = router;

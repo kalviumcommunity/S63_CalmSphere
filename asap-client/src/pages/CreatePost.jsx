@@ -62,14 +62,13 @@ function CreatePost() {
       {successMessage && <p className="success-message">{successMessage}</p>}
 
       <form onSubmit={handleSubmit}>
-        {/* Email field (disabled if auto-filled from URL) */}
+        {/* Email field (read-only if auto-filled from URL) */}
         <input
           type="email"
           placeholder="Your Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
           required
-          disabled={!!userEmail} // Disable input if email is pre-filled
+          readOnly // Makes it non-editable
         />
 
         {/* Content */}

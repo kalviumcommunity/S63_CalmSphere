@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './EntitiesList.css'
+import './EntitiesList.css';
+
 const EntitiesList = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
@@ -45,7 +46,7 @@ const EntitiesList = () => {
       <select onChange={(e) => setSelectedUser(e.target.value)}>
         <option value="">Select a User</option>
         {users.map((user) => (
-          <option key={user._id} value={user.email}>
+          <option key={user.id} value={user.email}>
             {user.email}
           </option>
         ))}
@@ -64,7 +65,7 @@ const EntitiesList = () => {
       {entities.length > 0 ? (
         <ul>
           {entities.map((entity) => (
-            <li key={entity._id}>{entity.name}</li>
+            <li key={entity.id}>{entity.name}</li>
           ))}
         </ul>
       ) : (
