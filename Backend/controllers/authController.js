@@ -1,25 +1,34 @@
-const { db } = require("../connectDB1");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const { db } = require("../connectDB1");
 
-// 🛑 Secret Key for JWT (store in .env for security)
-const SECRET_KEY = "your_secret_key"; 
+const SECRET_KEY = process.env.JWT_SECRET;
 
-// ✅ **Login Controller**
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // 🔍 Check if the user exists
-    const [users] = await db.query("SELECT * FROM users WHERE email = ? AND password = ?", [email, password]);
+    // 🔍 Find user by email
+    const [users] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
 
     if (users.length === 0) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    // ✅ Generate JWT Token
-    const token = jwt.sign({ email: users[0].email }, SECRET_KEY, { expiresIn: "1h" });
+    const user = users[0];
 
-    // 🍪 Set token in HTTP-Only Cookie
+    // 🔑 Compare hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    // ✅ Generate JWT Token
+    const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: "1h" });
+    console.log(token)
+
+    // 🍪 Store token in an HTTP-only cookie
     res.cookie("auth_token", token, { httpOnly: true, secure: false });
 
     res.json({ message: "Login successful", token });

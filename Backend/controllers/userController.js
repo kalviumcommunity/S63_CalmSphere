@@ -1,18 +1,22 @@
 const { db } = require("../connectDB1"); // ✅ Import correctly
-
+const bcrypt = require("bcryptjs");
 // CREATE - Add a new user
 exports.createUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+
+    // 🔒 Hash the password before storing
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-    const [result] = await db.query(sql, [name, email, password]); // ✅ Use await
+    const [result] = await db.query(sql, [name, email, hashedPassword]);
+
     res.status(201).json({ id: result.insertId, name, email });
   } catch (err) {
     console.error("Error creating user:", err);
     res.status(500).json({ error: "Error creating user", details: err.message });
   }
 };
-
 // READ - Get all users
 exports.getUsers = async (req, res) => {
   try {
