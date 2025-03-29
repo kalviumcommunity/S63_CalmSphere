@@ -12,7 +12,7 @@ const EntitiesList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/users");
+        const response = await fetch("http://localhost:5001/api/users");
         const data = await response.json();
         setUsers(data);
       } catch (error) {
@@ -29,7 +29,7 @@ const EntitiesList = () => {
 
     const fetchEntities = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/entities?created_by=${selectedUser}`);
+        const response = await fetch(`http://localhost:5001/api/entities?created_by=${selectedUser}`);
         const data = await response.json();
         setEntities(data);
       } catch (error) {

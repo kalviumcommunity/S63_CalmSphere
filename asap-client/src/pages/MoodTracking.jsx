@@ -17,7 +17,7 @@ function MoodTracker() {
   useEffect(() => {
     const fetchMoods = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/mood-tracking/${formattedDate}`);
+        const response = await fetch(`http://localhost:5001/api/mood-tracking/${formattedDate}`);
         if (!response.ok) {
           throw new Error("Failed to fetch moods");
         }
@@ -45,8 +45,8 @@ function MoodTracker() {
     try {
       const response = await fetch(
         editingMood
-          ? `http://localhost:5000/api/mood-tracking/${editingMood._id}`
-          : "http://localhost:5000/api/mood-tracking",
+          ? `http://localhost:5001/api/mood-tracking/${editingMood._id}`
+          : "http://localhost:5001/api/mood-tracking",
         {
           method: editingMood ? "PUT" : "POST",
           headers: { "Content-Type": "application/json" },
@@ -78,7 +78,7 @@ function MoodTracker() {
     if (!window.confirm("Are you sure you want to delete this mood?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/mood-tracking/${id}`, { method: "DELETE" });
+      const response = await fetch(`http://localhost:5001/api/mood-tracking/${id}`, { method: "DELETE" });
 
       if (!response.ok) {
         throw new Error("Failed to delete mood");
